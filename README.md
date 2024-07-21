@@ -14,3 +14,14 @@ objects columns:
 - parentid (unknown identifier)
 - imageurl (url to art jpeg)
 - site (location of artwork)
+
+
+test.db - simplified db for read/write testing purposes
+
+
+
+
+
+TODO
+
+Create DB for Testing purposes
