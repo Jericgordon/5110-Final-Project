@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<title>Artwork Access Portal</title>
+</head>
+
+<form action="http://localhost:5000/query", method ="POST">
+    <p>What Painting name would you like to look up?</p>
+    <p><input type="text" name="query"></p>
+    <p>
+        <select name ="Search by:" id="search_type">
+            <option value="Name">Name</option>
+            <option value="Artist">Artist</option>
+            <option value="Location">Location</option>
+            <option value="ID">ID</option>
+        </select>
+    </p>
+    <p><input type="submit" value="Lookup"/></p>
+</form>
+</html>     
