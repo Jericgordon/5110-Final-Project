@@ -59,7 +59,24 @@ def validate_write_data(painting, artist, year, link):
         return False,"Cannot have negative year"
     return True,""
 
-def get_number_from_tuple(tuple):
+def query(query_type,query_text):
+    #Check valid query
+    if table_columns.find(query_type) == -1:
+        message = f"{query_type} is not a valid query type"
+        return redirect(url_for('error_page', message = message))
+    conn = sqlite3.connect(database)
+    c = conn.cursor()
+    c.execute(f"""SELECT * FROM {table_name}
+                WHERE 
+                    {query_type} like "%{query_text}%";""")
+    results = c.fetchmany(size=50)
+    conn.commit()
+    conn.close()
+    return get_entries_from_tuple(results)
+
+#SQLite returns number entries like (2,). The goal of this function
+#is to change (2,) -> 2.
+def format_SQL_int(tuple):
     string_version = str(tuple)
     number = ""
     for char in string_version:
@@ -71,13 +88,37 @@ def get_number_from_tuple(tuple):
         except ValueError:
             pass
     return int(number)
+
+#SQLite returns number entries like "'string_here'". The goal of this function
+#is to change "'string_here'" -> "string_here"
+def format_SQL_string(string_with_quotation_marks):
+    return string_with_quotation_marks[1:len(string_with_quotation_marks)-1]
+
+def get_entries_from_tuple(tuple_list):
+    return_list = []
+    for tuple in tuple_list:
+        #This converts the returned list
+        print(format_entry(str(tuple).split(",")))
+        return_list.append(format_entry(str(tuple).split(",")))
+    return return_list
+
+
+
+def format_entry(entry):
+    entry[0] = format_SQL_int(entry[0]) #format ID
+    entry[1] = format_SQL_string(entry[1])
+    entry[2] = format_SQL_int(entry[2])
+    entry[3] = format_SQL_string(entry[3])
+    return entry
+
+
             
 
 def insert_data_into_tables(painting, artist, year, link):
     conn = sqlite3.connect(database)
     c = conn.cursor()
     c.execute(f"SELECT MAX(ID) FROM {table_name};")
-    max = get_number_from_tuple(c.fetchone()) + 1 #This line gets the max ID and adds 1
+    max = format_SQL_int(c.fetchone()) + 1 #Get a uniqueID for the new Entry
     c.execute(
         f""" INSERT INTO {table_name}({table_columns})
         VALUES({max},"{painting}",{year},"{link}");
@@ -89,4 +130,4 @@ def insert_data_into_tables(painting, artist, year, link):
 
 if __name__ == "__main__":
     app.run(debug=True)
-    #insert_data_into_tables("Mona Lisa","Divinchi",1667,"http://www.google.com")
+    print(query("NAME","a"))
