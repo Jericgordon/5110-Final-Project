@@ -4,11 +4,11 @@
 <title>Artwork Access Portal</title>
 </head>
 
-<form action="http://localhost:5000/query", method ="POST">
+<form action="http://localhost:{{port}}/query", method ="POST">
     <p>What Painting name would you like to look up?</p>
     <p><input type="text" name="query"></p>
     <p>
-        <select name ="Search by:" id="search_type">
+        <select name ="Search by:" name="search_type">
             <option value="Name">Name</option>
             <option value="Artist">Artist</option>
             <option value="Location">Location</option>
@@ -16,5 +16,32 @@
         </select>
     </p>
     <p><input type="submit" value="Lookup"/></p>
-</form>
+    </form>
+
+    {% if message %}
+    <p>{{message}}</p>
+    {% endif %}
+<!-- Results table for queries-->
+    <table>
+            <tr>
+                <th> Name </th>
+                <th> Publication Date</th>
+                <th> Link to image </th>
+            </tr>
+        {% for entry in entries %}
+            <tr>
+                <td> {{entry.artwork_name}} </td>
+                <td> {{entry.publication_date}} </td>
+                <td> <img src="{{entry.image_link}}" height="100"/></td>
+                <td><a href="http://localhost:{{port}}/update/{{entry.id}}">Edit</a></td>
+                <td>
+                    <form action="htt:://localhost:{{port}}/delete/{{entry.id}}" method="POST" name="Delete">
+                        <input type="submit" value="Delete">
+                    </form>
+            </td>
+                <td><a href="http://localhost:{{port}}/delete/{{entry.id}}">Delete</a></td>
+            </tr>
+        {% endfor %} 
+    </table>
+
 </html>     
