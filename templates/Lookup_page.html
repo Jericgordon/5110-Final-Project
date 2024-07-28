@@ -4,7 +4,7 @@
 <title>Artwork Access Portal</title>
 </head>
 
-<form action="http://localhost:{{port}}/query", method ="POST">
+<form action="http://localhost:{{port}}/query", method ="POST", id="lookup">
     <p>What Painting name would you like to look up?</p>
     <p><input type="text" name="query"></p>
     <p>
@@ -15,8 +15,9 @@
             <option value="ID">ID</option>
         </select>
     </p>
-    <p><input type="submit" value="Lookup"/></p>
-    </form>
+    </form> 
+    <p><button name ="Lookup" type="submit" value="Lookup" form="lookup">Lookup</button></p>
+    
 
     {% if message %}
     <p>{{message}}</p>
@@ -33,13 +34,14 @@
                 <td> {{entry.artwork_name}} </td>
                 <td> {{entry.publication_date}} </td>
                 <td> <img src="{{entry.image_link}}" height="100"/></td>
-                <td><a href="http://localhost:{{port}}/update/{{entry.id}}">Edit</a></td>
+                <td> 
+                    <form action="http://localhost:{{port}}/update/{{entry.id}}" method="POST" id ="update"></form>
+                    <p><button class="button" type="submit" value="Submit" form="update">Delete</button></p>
+                </td>
                 <td>
-                    <form action="htt:://localhost:{{port}}/delete/{{entry.id}}" method="POST" name="Delete">
-                        <input type="submit" value="Delete">
-                    </form>
-            </td>
-                <td><a href="http://localhost:{{port}}/delete/{{entry.id}}">Delete</a></td>
+                <form action="http://localhost:{{port}}/delete/{{entry.id}}" method="POST" id ="del"></form>
+                    <p><button class="button" type="submit" value="Submit" form="del">Delete</button></p>
+                </td>
             </tr>
         {% endfor %} 
     </table>

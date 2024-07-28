@@ -4,10 +4,10 @@
 <title>Artwork Access Portal</title>
 </head>
 <p>Would you like to read or write from the Database?</p> 
-<form action="http://localhost:5000/write", method ="GET">
+<form action="http://localhost:{{port}}/write", method ="GET">
     <p><input type="submit" value="Write"/></p>
 </form>
-<form action="http://localhost:5000/query", method="GET">
+<form action="http://localhost:{{port}}/query", method="GET">
     <p><input type="submit" value="Read"/></p>
 </form>
 </html>     
