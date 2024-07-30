@@ -86,7 +86,6 @@ class Artwork:
         self.index = elements[self._column_names[0]]
         self.objectid = elements[self._column_names[1]]
         self.locationid = elements[self._column_names[2]]
-        print("objid",self.objectid)
         self.title = elements[self._column_names[3]]
         self.displaydate = elements[self._column_names[4]]
         self.beginyear = elements[self._column_names[5]]
