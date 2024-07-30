@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<title>Artwork Access Portal</title>
+</head>
+<div id="Edit_prompt">
+    <p>Please input correct the correct information for the object below:</p>
+    <form action="http://localhost:{{port}}/edit/{{object.index}}", method="POST">
+        <p>title: <input type="text" name="title" value="{{object.title}}" required></p>
+        <p>display date: <input type="text" name="display_date" value="{{object.displaydate}}" required></p>
+        <p>begin year: <input type="text" name="begin_year" value="{{object.beginyear}}"></p>
+        <p>end year: <input type="text" name="end_year" value="{{object.endyear}}"></p>
+        <p>medium: <input type="text" name="medium" value="{{object.medium}}"></p>
+        <p>dimensions: <input type="text" name="dimensions" value="{{object.dimensions}}"></p>
+        <p>attribution: <input type="text" name="attribution" value="{{object.attribution}}"></p>
+        <p>classification: <input type="text" name="classification" value="{{object.classification}}"></p>
+        <p>image link: <input type="url" name="image_link" value="{{object.imageurl}}"></p>
+        <p>site: <input type="text" name="site" value="{{object.site}}"></p>
+        <p><input type="submit" value="Submit"></p>
+    </form>
+</div>
+</html>     

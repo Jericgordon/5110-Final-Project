@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<title>Artwork Access Portal</title>
+</head>
+<div id="Edit_prompt">
+    <p>Enter infromation for the item below</p>
+    <form action="http://localhost:{{port}}/edit/-1", method="POST">
+        <p>title: <input type="text" name="title"  required></p>
+        <p>display date: <input type="text" name="display_date" required></p>
+        <p>begin year: <input type="text" name="begin_year"></p>
+        <p>end year: <input type="text" name="end_year"></p>
+        <p>medium: <input type="text" name="medium"></p>
+        <p>dimensions: <input type="text" name="dimensions"></p>
+        <p>attribution: <input type="text" name="attribution"></p>
+        <p>classification: <input type="text" name="classification"></p>
+        <p>image link: <input type="url" name="image_link"></p>
+        <p>site: <input type="text" name="site"></p>
+        <p><input type="submit" value="Submit"></p>
+    </form>
+</div>
+</html>     

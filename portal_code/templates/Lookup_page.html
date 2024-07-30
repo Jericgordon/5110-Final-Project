@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<title>Artwork Access Portal</title>
+</head>
+<div>
+    <table>
+        <tr>
+    <form action="http://localhost:{{port}}/", method ="POST", id="lookup">
+        <p>What Painting name would you like to look up?</p>
+        <p><input type="text" name="query"></p>
+        <p>
+            <select name ="Search by:" name="search_type">
+                <option value="Title">Title</option>
+                <option value="Attribution">Attribution</option>
+                <option value="Index">Index</option>
+            </select>
+        </p>
+    </form> 
+        </tr>
+        <tr>
+            <tc>
+            <form action="http://localhost:{{port}}/edit/-1" method="GET" id="create"></form>
+            <p><button type="submit" form="create">Create</button></p>
+            </tc>
+
+            <tc>
+            <p><button name ="Lookup" type="submit" value="Lookup" form="lookup">Lookup</button></p>
+            </tc>
+        </tr>
+        </table>
+</div>
+
+    {% if message %}
+    <p>{{message}}</p>
+    {% endif %}
+<!-- Results table for queries-->
+    <table>
+            <tr>
+                <th> Name </th>
+                <th> Publication Date</th>
+                <th> Link to image </th>
+            </tr>
+        {% for entry in entries %}
+            <tr>
+                <td> {{entry.title}} </td>
+                <td> {{entry.displaydate}} </td>
+                <td> <img src= {{entry.imageurl}} height="100"/></td>
+                <td> 
+                    <form action="http://localhost:{{port}}/edit/{{entry.index}}" name ="update" method="GET" id ="update"></form>
+                    <p><button class="button" type="submit" value="Submit" form="update">Edit</button></p>
+                </td>
+                <td>
+                <form action="http://localhost:{{port}}/delete/{{entry.index}}" method="POST" id ="del"></form>
+                    <p><button class="button" type="submit" value="Submit" form="del" onclick="return confirm('are you sure you would like to delete this?')">Delete</button></p>
+                </td>
+            </tr>
+        {% endfor %} 
+    </table>
+
+
+</html> 
