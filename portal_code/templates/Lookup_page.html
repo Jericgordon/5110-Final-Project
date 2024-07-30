@@ -53,8 +53,9 @@
                    
                 </td>
                 <td>
-                    <form action="http://localhost:{{port}}/delete/{{entry.index}}" method="POST" id ="del"></form>
+                    <form action="http://localhost:{{port}}/delete/{{entry.index}}" method="POST" id ="del">
                     <input type="submit" value ="delete" onclick="return confirm('are you sure you would like to delete this?')"/>
+                    </form>
                 </td>
             </tr>
         {% endfor %} 
