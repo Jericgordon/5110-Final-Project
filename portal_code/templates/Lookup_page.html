@@ -47,12 +47,14 @@
                 <td> {{entry.displaydate}} </td>
                 <td> <img src= {{entry.imageurl}} height="100"/></td>
                 <td> 
-                    <form action="http://localhost:{{port}}/edit/{{entry.index}}" name ="update" method="GET" id ="update"></form>
-                    <p><button class="button" type="submit" value="Submit" form="update">Edit</button></p>
+                    <form action="http://localhost:{{port}}/edit/{{entry.index}}" name ="update" method="GET" id ="update">
+                        <input type="submit" value="edit"/>
+                    </form>
+                   
                 </td>
                 <td>
-                <form action="http://localhost:{{port}}/delete/{{entry.index}}" method="POST" id ="del"></form>
-                    <p><button class="button" type="submit" value="Submit" form="del" onclick="return confirm('are you sure you would like to delete this?')">Delete</button></p>
+                    <form action="http://localhost:{{port}}/delete/{{entry.index}}" method="POST" id ="del"></form>
+                    <input type="submit" value ="delete" onclick="return confirm('are you sure you would like to delete this?')"/>
                 </td>
             </tr>
         {% endfor %} 

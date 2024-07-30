@@ -2,12 +2,9 @@ from flask import Flask, render_template, request, redirect,url_for
 import sqlite3
 from Artwork import Artwork 
 # importing module
-import logging
+
  
-# Create and configure logger
-logging.basicConfig(filename="newfile.log",
-                    format='%(asctime)s %(message)s',
-                    filemode='w')
+
 
 #global variables
 app = Flask(__name__)
@@ -73,6 +70,7 @@ def write_to_db():
                 return redirect(url_for('error_page', message = ae),port=port)
         case _:
             return render_template("./Write_page.html",port = port)
+
 
 @app.route("/edit/<id>", methods = ["POST","GET"])
 def edit_page(id:int):
