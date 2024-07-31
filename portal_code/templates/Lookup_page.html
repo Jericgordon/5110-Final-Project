@@ -40,12 +40,14 @@
                 <th> Name </th>
                 <th> Publication Date</th>
                 <th> Link to image </th>
+                <th> Current Location </th>
             </tr>
         {% for entry in entries %}
             <tr>
                 <td> {{entry.title}} </td>
                 <td> {{entry.displaydate}} </td>
                 <td> <img src= {{entry.imageurl}} height="100"/></td>
+                <td> {{entry.site}} </td>
                 <td> 
                     <form action="http://localhost:{{port}}/edit/{{entry.index}}" name ="update" method="GET" id ="update">
                         <input type="submit" value="edit"/>
@@ -57,6 +59,7 @@
                     <input type="submit" value ="delete" onclick="return confirm('are you sure you would like to delete this?')"/>
                     </form>
                 </td>
+                
             </tr>
         {% endfor %} 
     </table>
