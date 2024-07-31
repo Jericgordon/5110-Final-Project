@@ -29,6 +29,7 @@ class Artwork:
         WHERE "index" = {index};
         """)
         result = c.fetchone()
+        print(str(result))
 
         #Ensure there was actually a valid result for that index
         if result == None:
@@ -54,24 +55,12 @@ class Artwork:
         self.imageurl = object_attributes[12]
         self.site = object_attributes[-1] 
 
-    def _get_image_link(self,tuple):
-        pattern = r"http.+\.jpg"
-        link = re.findall(pattern,str(tuple))
-        if len(link) > 0:
-            return link[-1]
-        else:
-            return None
-        
-
-
     #returns a copy of the column names for the table
     def get_column_names(self) ->list:
         return self._column_names
              
     def load_from_search_result(self,tuple):
         self.load_from_index(int(tuple[0]))
-
-
     
     def delete_from_db(self,ID:int):
         conn = sqlite3.connect(self._database)
@@ -97,7 +86,6 @@ class Artwork:
         self.parentid = elements[self._column_names[11]]
         self.imageurl = elements[self._column_names[12]]
         self.site = elements[self._column_names[13]]
-
     
     def insert_object_into_db(self):
         conn = sqlite3.connect(self._database)
@@ -145,11 +133,6 @@ class Artwork:
             conn.commit()
             conn.close()
 
-    #removes the characters ",(,) and ' from a string
-    def _remove_SQL_extras(self,string:str) -> str:
-        removal_table = {ord("("):None,ord(")"):None,ord(","):None,ord("'"):None}
-        return string.translate(removal_table)
-
     def _fill_if_not_null(self,val1,val2):
         if len(str(val1)) > 0:
             return val1
@@ -181,20 +164,20 @@ class Artwork:
 
 
 
-# database = "Art.db"
-# table_name = "objects"
+database = "Art.db"
+table_name = "objects"
 
 
-# conn = sqlite3.connect(database)
-# c = conn.cursor()
-# a = Artwork(database,table_name)
+conn = sqlite3.connect(database)
+c = conn.cursor()
+a = Artwork(database,table_name)
 
 # # print(a._column_names)
 
 # c.close()
 
-# # a = Artwork(database,table_name)
-# a.load_from_index(135434)
+# a = Artwork(database,table_name)
+a.load_from_index(135434)
 
 # a.load_from_index(1)
 # mona_lisa_link = "www.google.com"
